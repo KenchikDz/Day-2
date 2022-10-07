@@ -1,0 +1,89 @@
+* {
+	font-family: "arsenal";
+	font-size: var(--clc);	
+}
+:root {
+	--clr: color: #141414;
+	--clc: calc(1.5vw + 1.5vh);	
+	--transition: 1.25s cubic-bezier(.2, .5, 0, 1);
+    --transition-cursor: 2s cubic-bezier(.05, .5, 0, 1);
+}
+@font-face {
+	font-family: "arsenal";
+	src: url("./fonts/arsenal-regular.woff2");
+}
+body {
+	z-index: 0;
+}
+.magic-list {	
+	vertical-align: center;	
+	width: 100%;
+}
+.magic-list_item {
+	text-decoration: none;
+	width: 100%;
+}
+.magic-list_item:first-child {
+
+}
+.magic-list_header {
+	transition: transform var(--transition);
+	height: calc(100vh/5);
+	padding-left: 10vw; 
+	margin-bottom: auto;
+	transition: all .5s;
+}
+.magic-list_item::before {
+	transition: transform var(--transition);
+	height: 1s ease;	
+}
+.magic-list_item:hover .magic-list_header,
+.magic-list_item:hover::before {	
+	padding-left: 1vw;	
+	
+	position: relative;
+}
+.cursor {
+	transition: transform var(--transition-cursor) height 1s ease;
+    width: calc(100vw/3);
+    height: 10vh;
+    position: absolute;
+}
+.magic-list_item:hover .cursor {
+    transform: translate(var(--move-x),var(--move-y));
+}
+.cursor_image {
+	display: none;
+    z-index: 1000;
+    transition: transform var(--transition-cursor);
+    background-size: 100%; 
+    height: 30vh;
+    	
+}
+.magic-list_item:hover .cursor_image {
+	display: block;
+    z-index: 1000;
+}
+.first {
+	border: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
