@@ -7,6 +7,8 @@
 	--clc: calc(1.5vw + 1.5vh);	
 	--transition: 1.25s cubic-bezier(.2, .5, 0, 1);
     --transition-cursor: 2s cubic-bezier(.05, .5, 0, 1);
+    --width: calc(var(--clc) * 20);
+    --height: calc(var(--clc) * 15));
 }
 @font-face {
 	font-family: "arsenal";
@@ -15,16 +17,20 @@
 body {
 	z-index: 0;
 }
-.magic-list {	
+.magic-list {		
+	display: block;
+	position: absolute;	
 	vertical-align: center;	
 	width: 100%;
 }
 .magic-list_item {
+	cursor: none;
+	border-bottom: 1px solid black;
 	text-decoration: none;
 	width: 100%;
 }
 .magic-list_item:first-child {
-
+	
 }
 .magic-list_header {
 	transition: transform var(--transition);
@@ -35,38 +41,56 @@ body {
 }
 .magic-list_item::before {
 	transition: transform var(--transition);
-	height: 1s ease;	
+		
+	transition-delay: .025s;
+	will-change: transform;	
 }
 .magic-list_item:hover .magic-list_header,
 .magic-list_item:hover::before {	
 	padding-left: 1vw;	
-	
-	position: relative;
+	transform: translate3d(calc(var(--index) * -5), 0, 0);
 }
 .cursor {
-	transition: transform var(--transition-cursor) height 1s ease;
-    width: calc(100vw/3);
-    height: 10vh;
-    position: absolute;
+	transition: transform var(--transition-cursor), height 1s ease;
+    width: calc(var(--clc)*20);
+    height: calc(var(--clc)*15);
+    overflow: hidden;
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate3d(var(--move-x), var(--move-y), 0);
+	will-change: transform;
+
+}
+.cursor_image--base {
+	transform: translateZ(0);
+}
+.cursor_image--back {
+	transform: translateZ(-1px);
 }
 .magic-list_item:hover .cursor {
     transform: translate(var(--move-x),var(--move-y));
+   
 }
 .cursor_image {
 	display: none;
-    z-index: 1000;
-    transition: transform var(--transition-cursor);
-    background-size: 100%; 
-    height: 30vh;
-    	
+    --cursor-transform: translate3d(calc(var(--move-x) / -5), calc(var(--move-y) / -5), 0);
+	transform: var(--cursor-transform) scale(3);
+	transition: transform var(--transition-cursor);    
+    height: 35vh;
+    width: 50vw;
+    background-position: center;
+    background-size: cover; 	
+    position: relative;
+    top: calc(var(--height) * -.2);
+    left: calc(var(--width) * -.2);
 }
 .magic-list_item:hover .cursor_image {
+	transform: var(--cursor-transform) scale(1);
 	display: block;
-    z-index: 1000;
 }
-.first {
-	border: bold;
-}
+
 
 
 
